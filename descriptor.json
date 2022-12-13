@@ -1,0 +1,16 @@
+﻿{
+  "Descriptor": {
+    "UId": "536f449c-89f8-4167-9a48-e71d55df4b84",
+    "PackageVersion": "2.2.6",
+    "Name": "ExternalSystemsIntegration",
+    "ModifiedOnUtc": "\/Date(1666593276000)\/",
+    "Maintainer": "Customer",
+    "DependsOn": [
+      {
+        "UId": "5cb80ad0-f652-4c63-90e3-0b4eb9b606e1",
+        "PackageVersion": "2.2.6",
+        "Name": "EVA"
+      }
+    ]
+  }
+}
