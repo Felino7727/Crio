@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Resources Culture="ru-RU">
+	<Group Type="String">
+		<Items>
+			<Item Name="Caption" Value="Ошибка отправки состояния заказа" />
+			<Item Name="Columns.UsrCode.Caption" Value="ID код" />
+			<Item Name="Columns.UsrIsResend.Caption" Value="Отправить повторно" />
+			<Item Name="EventsProcessSchema.Caption" Value="Бизнес-процесс" />
+		</Items>
+	</Group>
+</Resources>

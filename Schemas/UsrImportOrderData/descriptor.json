@@ -1,0 +1,9 @@
+﻿{
+  "Descriptor": {
+    "UId": "9f23e49e-251c-40d6-9096-7256a204a2ce",
+    "Name": "UsrImportOrderData",
+    "ModifiedOnUtc": "\/Date(1670887584000)\/",
+    "ManagerName": "ProcessSchemaManager",
+    "Caption": "Импорт данных по заказу"
+  }
+}

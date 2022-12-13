@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Resources Culture="ru-RU">
+	<Group Type="String">
+		<Items>
+			<Item Name="Caption" Value="Журнал интеграции внешних систем" />
+			<Item Name="Columns.UsrBody.Caption" Value="Тело" />
+			<Item Name="Columns.UsrEntity.Caption" Value="Сущность" />
+			<Item Name="Columns.UsrExecution.Caption" Value="Исполнение" />
+			<Item Name="Columns.UsrService.Caption" Value="Cервис" />
+			<Item Name="EventsProcessSchema.Caption" Value="Бизнес-процесс" />
+		</Items>
+	</Group>
+</Resources>

@@ -1,0 +1,13 @@
+﻿{
+  "Descriptor": {
+    "UId": "0703b355-06d1-4514-a466-ee03b03098dc",
+    "Name": "UsrExternalSystemsIntegrationOrderLog",
+    "ModifiedOnUtc": "\/Date(1666088113000)\/",
+    "Parent": {
+      "UId": "1bab9dcf-17d5-49f8-9536-8e0064f1dce0",
+      "Name": "BaseEntity"
+    },
+    "ManagerName": "EntitySchemaManager",
+    "Caption": "Журнал интеграции заказа"
+  }
+}

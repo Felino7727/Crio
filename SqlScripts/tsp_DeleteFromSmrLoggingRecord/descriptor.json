@@ -1,0 +1,10 @@
+﻿{
+  "SqlScript": {
+    "UId": "a1db8bdd-f4f3-4fe3-90cd-fe7286d2be72",
+    "Name": "tsp_DeleteFromSmrLoggingRecord",
+    "DBEngineType": 0,
+    "InstallType": 2,
+    "ModifiedOnUtc": "\/Date(1667381200000)\/",
+    "DependsOn": []
+  }
+}

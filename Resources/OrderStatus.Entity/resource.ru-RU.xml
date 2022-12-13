@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Resources Culture="ru-RU">
+	<Group Type="String">
+		<Items>
+			<Item Name="Columns.UsrIsGet.Caption" Value="Устанавливаемое" />
+			<Item Name="Columns.UsrIsSet.Caption" Value="Отправляемое" />
+		</Items>
+	</Group>
+</Resources>

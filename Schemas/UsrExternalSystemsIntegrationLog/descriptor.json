@@ -1,0 +1,13 @@
+﻿{
+  "Descriptor": {
+    "UId": "921a53f1-f774-4e8e-80e2-476379de8227",
+    "Name": "UsrExternalSystemsIntegrationLog",
+    "ModifiedOnUtc": "\/Date(1650291414000)\/",
+    "Parent": {
+      "UId": "1bab9dcf-17d5-49f8-9536-8e0064f1dce0",
+      "Name": "BaseEntity"
+    },
+    "ManagerName": "EntitySchemaManager",
+    "Caption": "Журнал интеграции внешних систем"
+  }
+}

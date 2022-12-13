@@ -1,0 +1,9 @@
+﻿{
+  "Descriptor": {
+    "UId": "972cae96-9539-4101-bc62-4f0e933876be",
+    "Name": "UsrImportGiftCertificateData",
+    "ModifiedOnUtc": "\/Date(1667381942000)\/",
+    "ManagerName": "ProcessSchemaManager",
+    "Caption": "Импорт данных по подарочному сертификату"
+  }
+}

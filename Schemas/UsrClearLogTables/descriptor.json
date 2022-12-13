@@ -1,0 +1,9 @@
+﻿{
+  "Descriptor": {
+    "UId": "f09e8718-4945-454f-89ff-8facf3481dfa",
+    "Name": "UsrClearLogTables",
+    "ModifiedOnUtc": "\/Date(1667375743000)\/",
+    "ManagerName": "ProcessSchemaManager",
+    "Caption": "Очистка таблиц логирования"
+  }
+}

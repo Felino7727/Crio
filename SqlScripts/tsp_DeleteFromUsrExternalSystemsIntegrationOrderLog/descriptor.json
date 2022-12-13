@@ -1,0 +1,10 @@
+﻿{
+  "SqlScript": {
+    "UId": "86a4f56d-a0ca-4c02-8abe-c0fba32ddf76",
+    "Name": "tsp_DeleteFromUsrExternalSystemsIntegrationOrderLog",
+    "DBEngineType": 0,
+    "InstallType": 2,
+    "ModifiedOnUtc": "\/Date(1667375668000)\/",
+    "DependsOn": []
+  }
+}

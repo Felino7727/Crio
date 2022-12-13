@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Resources Culture="ru-RU">
+	<Group Type="String">
+		<Items>
+			<Item Name="BaseElements.ImportProductDataScriptTask.Caption" Value="Импорт данных по продукту" />
+			<Item Name="BaseElements.LinkProductEntityToProcess.Caption" Value="Привязать процесс к продукту" />
+			<Item Name="BaseElements.LinkProductEntityToProcess.Parameters.EntityId.Caption" Value="Объект" />
+			<Item Name="BaseElements.LinkProductEntityToProcess.Parameters.EntityId.DisplayValue" Value="[#ProductId#]" />
+			<Item Name="BaseElements.LinkProductEntityToProcess.Parameters.EntitySchemaId.Caption" Value="Схема объекта" />
+			<Item Name="BaseElements.LinkProductEntityToProcess.Parameters.EntitySchemaId.DisplayValue" Value="Продукт" />
+			<Item Name="Caption" Value="Импорт данных по продукту" />
+			<Item Name="LaneSets.LaneSet1.Caption" Value="LaneSet 1" />
+			<Item Name="LaneSets.LaneSet1.Lanes.Lane1.Caption" Value="Lane 1" />
+			<Item Name="NotificationCaption.Caption" Value="Заголовок экземпляра процесса" />
+			<Item Name="NotificationCaption.DisplayValue" Value="[#Название процесса#]" />
+			<Item Name="Parameters.ProductId.Caption" Value="ProductId" />
+		</Items>
+	</Group>
+</Resources>

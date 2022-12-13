@@ -1,0 +1,13 @@
+﻿{
+  "Descriptor": {
+    "UId": "2c11cd96-5e57-46fc-bbb2-38d9596a6ffc",
+    "Name": "UsrErrorSendOrderStatus",
+    "ModifiedOnUtc": "\/Date(1658242956000)\/",
+    "Parent": {
+      "UId": "11ab4bcb-9b23-4b6d-9c86-520fae925d75",
+      "Name": "BaseLookup"
+    },
+    "ManagerName": "EntitySchemaManager",
+    "Caption": "Ошибка отправки состояния заказа"
+  }
+}

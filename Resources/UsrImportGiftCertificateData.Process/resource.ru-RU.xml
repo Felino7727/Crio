@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Resources Culture="ru-RU">
+	<Group Type="String">
+		<Items>
+			<Item Name="BaseElements.ImportGiftCertificateDataScriptTask.Caption" Value="Импорт данных по подарочному сертификату" />
+			<Item Name="BaseElements.LinkOrderEntityToProcess.Caption" Value="Привязать процесс к заказу" />
+			<Item Name="BaseElements.LinkOrderEntityToProcess.Parameters.EntityId.Caption" Value="Объект" />
+			<Item Name="BaseElements.LinkOrderEntityToProcess.Parameters.EntityId.DisplayValue" Value="[#OrderId#]" />
+			<Item Name="BaseElements.LinkOrderEntityToProcess.Parameters.EntitySchemaId.Caption" Value="Схема объекта" />
+			<Item Name="BaseElements.LinkOrderEntityToProcess.Parameters.EntitySchemaId.DisplayValue" Value="Заказ" />
+			<Item Name="Caption" Value="Импорт данных по подарочному сертификату" />
+			<Item Name="LaneSets.LaneSet1.Caption" Value="LaneSet 1" />
+			<Item Name="LaneSets.LaneSet1.Lanes.Lane1.Caption" Value="Lane 1" />
+			<Item Name="NotificationCaption.Caption" Value="Заголовок экземпляра процесса" />
+			<Item Name="NotificationCaption.DisplayValue" Value="[#Название процесса#]" />
+			<Item Name="Parameters.OrderId.Caption" Value="OrderId" />
+		</Items>
+	</Group>
+</Resources>
