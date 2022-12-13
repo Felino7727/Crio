@@ -145,7 +145,7 @@ namespace ExternalSystemsIntegration.Files.cs.Exchange.Data
                         resultAuthorization.Wait();
 
                         Task getOrderStatus = Task.Run(async () => { 
-                            if (!token.IsCancellationRequested)
+                            if (token.IsCancellationRequested)
                                 token.ThrowIfCancellationRequested(); 
 
                             await GetOrderData(dateLastExport, userConnection); 
