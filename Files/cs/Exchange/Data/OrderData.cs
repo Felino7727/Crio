@@ -141,29 +141,23 @@ namespace ExternalSystemsIntegration.Files.cs.Exchange.Data
 
                         ApiUmAuth authorization = new ApiUmAuth();
 
-                        Task resultAuthorization = Task.Run(async () => { await authorization.Authorization(userConnection); });
+                        Task resultAuthorization = Task.Run(async () => { await authorization.Authorization(userConnection); });                        
                         resultAuthorization.Wait();
 
+                        Task getOrderStatus = Task.Run(async () => { 
+                            if (!token.IsCancellationRequested)
+                                token.ThrowIfCancellationRequested(); 
 
-                        Task getOrderStatus = Task.Run(async () =>
-                        {
-                            try
-                            {
-                                cancelTokenSource.CancelAfter(TimeSpan.FromSeconds(usrResponseTimeout));
-                                await GetOrderData(dateLastExport, userConnection);
-                            }
-                            catch (OperationCanceledException)
-                            {
-                                Logger.WriteToOrderLog("PrepareDataToGetOrderData.OperationCanceledException", "время ожидания истекло и не был получен ответ со стороны ОС", userConnection);                               
-                            }
-                            finally
-                            {
-                                cancelTokenSource.Dispose();
-                            }
-                        
-                        });
-                        if (getOrderStatus.Wait(TimeSpan.FromSeconds(usrResponseTimeout)))
-                        {
+                            await GetOrderData(dateLastExport, userConnection); 
+                        }, token);
+
+                        try
+                        {                            
+                            getOrderStatus.Start();
+                            Thread.Sleep(usrResponseTimeout * 1000);
+                            cancelTokenSource.Cancel();
+                            getOrderStatus.Wait();
+
                             try
                             {
                                 double timeOffsetStep = Convert.ToDouble(SysSettings.GetValue(userConnection, "UsrTimeOffsetStepApiUmMethodGetOrderData"));
@@ -176,8 +170,23 @@ namespace ExternalSystemsIntegration.Files.cs.Exchange.Data
                                 return ex.Message;
                             }
                         }
-                        else return "Время ожидания истекло и не был получен ответ со стороны ОС";
-
+                        catch (AggregateException agg)
+                        {
+                            foreach (Exception e in agg.InnerExceptions)
+                            {
+                                if (e is TaskCanceledException)
+                                {
+                                    Logger.WriteToOrderLog("TaskCanceledException", "Долгая обработка", userConnection);
+                                }
+                                else
+                                    Logger.WriteToOrderLog("TaskCanceledException", e.Message, userConnection); ;
+                            }
+                        }
+                        finally
+                        {
+                            cancelTokenSource.Dispose();
+                        }
+                        
                     }
                     catch (Exception ex)
                     {
