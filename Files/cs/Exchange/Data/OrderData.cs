@@ -125,7 +125,7 @@ namespace ExternalSystemsIntegration.Files.cs.Exchange.Data
         /// <summary> Подготовка данных для запроса данных по заказу </summary>
         /// <param name="dateLastExport"> Дата и время с которой импортировать данные </param>
         /// <param name="userConnection"> Пользовательское подключение, используемое при выполнении запроса </param>
-        /// /// <param name="usrResponseTimeout"> Системная настройка (время до зовершения)</param>
+        /// /// <param name="usrResponseTimeout"> Системная настройка (время до завершения)</param>
         /// <returns> string.Empty если успех, ex.Message если возникло исключение </returns>
         public string PrepareDataToGetOrderData(DateTime? dateLastExport, UserConnection userConnection, int usrResponseTimeout)
         {
@@ -140,57 +140,44 @@ namespace ExternalSystemsIntegration.Files.cs.Exchange.Data
                         CancellationToken token = cancelTokenSource.Token;
 
                         ApiUmAuth authorization = new ApiUmAuth();
+
                         Task resultAuthorization = Task.Run(async () => { await authorization.Authorization(userConnection); });
                         resultAuthorization.Wait();
 
-                        try
+
+                        Task getOrderStatus = Task.Run(async () =>
                         {
-                            Task getOrderStatus = Task.Run(async () =>
+                            try
                             {
-                                if (!token.IsCancellationRequested)
-                                {
-                                    await GetOrderData(dateLastExport, userConnection);
-                                }                               
-                            }, token);
-                            //Ожидам 300 сек
-                            Thread.Sleep(TimeSpan.FromSeconds(usrResponseTimeout));                           
-                            cancelTokenSource.Cancel();
-                            //Если за 300сек не выполнилось
-                            if (getOrderStatus.Wait(TimeSpan.FromSeconds(usrResponseTimeout)))
+                                cancelTokenSource.CancelAfter(TimeSpan.FromSeconds(usrResponseTimeout));
+                                await GetOrderData(dateLastExport, userConnection);
+                            }
+                            catch (OperationCanceledException)
                             {
-                                try
-                                {
-                                    double timeOffsetStep = Convert.ToDouble(SysSettings.GetValue(userConnection, "UsrTimeOffsetStepApiUmMethodGetOrderData"));
-                                    dateLastExport = DateTime.Now.AddSeconds(timeOffsetStep);
-                                    SysSettings.SetDefValue(userConnection, "UsrDateLastExportApiUmMethodGetOrderData", dateLastExport);
-                                }
-                                catch (Exception ex)
-                                {
-                                    Logger.WriteToOrderLog("PrepareDataToGetOrderData.SysSettings.SetDefValue.Exception", ex.Message, userConnection);
-                                    return ex.Message;
-                                }
-                            }                           
-                        }//Ловим исключение по cancelTokenSource.Cancel()
-                        catch (AggregateException agg)
+                                Logger.WriteToOrderLog("PrepareDataToGetOrderData.OperationCanceledException", "время ожидания истекло и не был получен ответ со стороны ОС", userConnection);                               
+                            }
+                            finally
+                            {
+                                cancelTokenSource.Dispose();
+                            }
+                        
+                        });
+                        if (getOrderStatus.Wait(TimeSpan.FromSeconds(usrResponseTimeout)))
                         {
-                            foreach (Exception ex in agg.InnerExceptions)
+                            try
                             {
-                                if (ex is TaskCanceledException)
-                                {
-                                    Logger.WriteToOrderLog("PrepareDataToGetOrderData.TaskCanceledException", ex.Message, userConnection);
-                                    return "Время ожидания истекло и не был получен ответ со стороны ОС";
-                                }
-                                else
-                                {
-                                    Logger.WriteToOrderLog("PrepareDataToGetOrderData.TaskCanceledException", ex.Message, userConnection);
-                                    return ex.Message;
-                                }                                
+                                double timeOffsetStep = Convert.ToDouble(SysSettings.GetValue(userConnection, "UsrTimeOffsetStepApiUmMethodGetOrderData"));
+                                dateLastExport = DateTime.Now.AddSeconds(timeOffsetStep);
+                                SysSettings.SetDefValue(userConnection, "UsrDateLastExportApiUmMethodGetOrderData", dateLastExport);
+                            }
+                            catch (Exception ex)
+                            {
+                                Logger.WriteToOrderLog("PrepareDataToGetOrderData.SysSettings.SetDefValue.Exception", ex.Message, userConnection);
+                                return ex.Message;
                             }
                         }
-                        finally
-                        {
-                            cancelTokenSource.Dispose();
-                        }    
+                        else return "Время ожидания истекло и не был получен ответ со стороны ОС";
+
                     }
                     catch (Exception ex)
                     {
@@ -215,28 +202,7 @@ namespace ExternalSystemsIntegration.Files.cs.Exchange.Data
                         {
                             Logger.WriteToOrderLog("PrepareDataToGetOrderData.SysSettings.SetDefValue.Exception", ex.Message, userConnection);
                             return ex.Message;
-                        }
-                        //Не прерывая выполнения
-                        /*if (getOrderStatus.Wait(TimeSpan.FromSeconds(usrResponseTimeout)))
-                            {
-
-                            try
-                            {
-                                double timeOffsetStep = Convert.ToDouble(SysSettings.GetValue(userConnection, "UsrTimeOffsetStepApiUmMethodGetOrderData"));
-                                dateLastExport = DateTime.Now.AddSeconds(timeOffsetStep);
-                                SysSettings.SetDefValue(userConnection, "UsrDateLastExportApiUmMethodGetOrderData", dateLastExport);
-                            }
-                            catch (Exception ex)
-                            {
-                                Logger.WriteToOrderLog("PrepareDataToGetOrderData.SysSettings.SetDefValue.Exception", ex.Message, userConnection);
-                                return ex.Message;
-                            }
-                        }
-                        else
-                        {
-                            Logger.WriteToOrderLog("PrepareDataToGetOrderData.SysSettings.SetDefValue.Exception", "время ожидания истекло и не был получен ответ со стороны ОС", userConnection);
-                            return "Время ожидания истекло и не был получен ответ со стороны ОС";
-                        }*/
+                        }                        
                     }
                     catch (Exception ex)
                     {
